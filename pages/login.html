@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Library Management System</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="../index.html" class="back-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                <div class="auth-logo">
+                    <i class="fas fa-book-reader"></i>
+                    <h2>Library Login</h2>
+                </div>
+                <p class="auth-subtitle">Sign in to access your library portal</p>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="userRole">Select Your Role</label>
+                    <div class="role-selector">
+                        <div class="role-option" data-role="student">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Student</span>
+                        </div>
+                        <div class="role-option" data-role="faculty">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Faculty</span>
+                        </div>
+                        <div class="role-option" data-role="librarian">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Librarian</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="userRole" name="userRole" value="student" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userId">User ID</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="userId" name="userId" placeholder="Enter your User ID" required>
+                    </div>
+                    <small class="hint" id="idHint">Enter your Student ID (e.g., S1001)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="remember-forgot">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-auth">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+
+                <div class="auth-divider">
+                    <span>Don't have an account?</span>
+                </div>
+
+                <a href="register.html" class="btn btn-secondary btn-auth">
+                    <i class="fas fa-user-plus"></i> Create New Account
+                </a>
+
+                <div class="demo-credentials">
+                    <h4>Demo Credentials:</h4>
+                    <div class="demo-role">
+                        <strong>Student:</strong> S1001 / password123
+                    </div>
+                    <div class="demo-role">
+                        <strong>Faculty:</strong> F101 / faculty123
+                    </div>
+                    <div class="demo-role">
+                        <strong>Librarian:</strong> L10 / admin123
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="auth-features">
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure Login</h3>
+                <p>Your credentials are encrypted and secure</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-clock"></i>
+                <h3>24/7 Access</h3>
+                <p>Access library resources anytime, anywhere</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h3>Need Help?</h3>
+                <p>Contact library support at library@university.edu</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script src="../database.js"></script>
+    <script src="../auth.js"></script>
+    <script>
+        // Role selection
+        document.querySelectorAll('.role-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const role = this.dataset.role;
+                
+                // Update active state
+                document.querySelectorAll('.role-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Update hidden input
+                document.getElementById('userRole').value = role;
+                
+                // Update hint text
+                const hint = document.getElementById('idHint');
+                switch(role) {
+                    case 'student':
+                        hint.textContent = 'Enter your Student ID (e.g., S1001)';
+                        break;
+                    case 'faculty':
+                        hint.textContent = 'Enter your Faculty ID (e.g., F101)';
+                        break;
+                    case 'librarian':
+                        hint.textContent = 'Enter your Librarian ID (e.g., L10)';
+                        break;
+                }
+            });
+        });
+
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            authManager.handleLogin(e);
+        });
+
+        // Check URL for role parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const roleFromUrl = urlParams.get('role');
+        if (roleFromUrl) {
+            const roleOption = document.querySelector(`.role-option[data-role="${roleFromUrl}"]`);
+            if (roleOption) {
+                roleOption.click();
+            }
+        }
+
+        // Initialize with student role selected
+        document.querySelector('.role-option[data-role="student"]').click();
+    </script>
+</body>
+</html>

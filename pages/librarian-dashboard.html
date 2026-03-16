@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard - Library Management System</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <div class="dashboard-logo">
+                <i class="fas fa-book-reader"></i>
+                <span>Librarian Portal</span>
+            </div>
+            <div class="dashboard-user">
+                <div class="user-info">
+                    <i class="fas fa-user-tie"></i>
+                    <span id="welcomeMessage">Welcome, Librarian!</span>
+                </div>
+                <button id="logoutBtn" class="btn btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="user-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="user-details">
+                    <h4 id="userName">Librarian Name</h4>
+                    <p id="userInfo">Library Administrator</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="overview">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-section="books">
+                    <i class="fas fa-book"></i> Manage Books
+                </a>
+                <a href="#" class="nav-item" data-section="users">
+                    <i class="fas fa-users"></i> Manage Users
+                </a>
+                <a href="#" class="nav-item" data-section="transactions">
+                    <i class="fas fa-exchange-alt"></i> Transactions
+                </a>
+                <a href="#" class="nav-item" data-section="reports">
+                    <i class="fas fa-chart-bar"></i> Reports
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="quick-stats">
+                    <div class="stat">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <h4 id="totalBooks">0</h4>
+                            <small>Total Books</small>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h4 id="totalUsers">0</h4>
+                            <small>Total Users</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-main">
+            <!-- Overview Section -->
+            <section id="overviewSection" class="dashboard-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-home"></i> Librarian Dashboard</h2>
+                    <div class="section-actions">
+                        <button id="addBookBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add New Book
+                        </button>
+                        <button id="generateReportBtn" class="btn btn-success">
+                            <i class="fas fa-file-export"></i> Generate Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalBooksCount">0</h3>
+                            <p>Total Books</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="availableBooksCount">0</h3>
+                            <p>Available Books</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalUsersCount">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="todayTransactionsCount">0</h3>
+                            <p>Today's Transactions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-history"></i> Recent Transactions</h3>
+                        <div id="recentTransactions">
+                            <div class="loading-state">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading transactions...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-chart-line"></i> Popular Books</h3>
+                        <div id="popularBooks">
+                            <div class="loading-state">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading data...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Overdue Books</h3>
+                        <div id="overdueBooks">
+                            <div class="loading-state">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading data...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Books Management Section -->
+            <section id="booksSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-book"></i> Book Management</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="dashboard.showModal('addBookModal')">
+                            <i class="fas fa-plus"></i> Add New Book
+                        </button>
+                        <div class="search-box">
+                            <input type="text" id="searchBooks" placeholder="Search books...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="allBooksContainer">
+                    <div class="loading-state">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading books...</p>
+                    </div>
+                </div>
+                
+                <div class="export-actions">
+                    <button class="btn btn-secondary" id="exportBooksBtn">
+                        <i class="fas fa-file-export"></i> Export Books Data
+                    </button>
+                </div>
+            </section>
+
+            <!-- Users Management Section -->
+            <section id="usersSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> User Management</h2>
+                    <div class="section-actions">
+                        <button id="viewStudentsBtn" class="btn btn-primary">
+                            <i class="fas fa-user-graduate"></i> View Students
+                        </button>
+                        <button id="viewFacultyBtn" class="btn btn-primary">
+                            <i class="fas fa-chalkboard-teacher"></i> View Faculty
+                        </button>
+                        <button id="viewAllUsersBtn" class="btn btn-secondary">
+                            <i class="fas fa-users"></i> View All Users
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="users-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalStudents">0</h3>
+                            <p>Total Students</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalFaculty">0</h3>
+                            <p>Total Faculty</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalLibrarians">0</h3>
+                            <p>Librarians</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="export-actions">
+                    <button class="btn btn-secondary" id="exportUsersBtn">
+                        <i class="fas fa-file-export"></i> Export Users Data
+                    </button>
+                </div>
+            </section>
+
+            <!-- Transactions Section -->
+            <section id="transactionsSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-exchange-alt"></i> Transaction History</h2>
+                    <div class="section-actions">
+                        <input type="date" id="filterDate" class="date-filter">
+                        <select id="filterType" class="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="b">Borrows</option>
+                            <option value="r">Returns</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="transactions-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>User ID</th>
+                                <th>Book ID</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsList">
+                            <tr>
+                                <td colspan="5" class="loading-state">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <span>Loading transactions...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reportsSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> Reports & Analytics</h2>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Borrowing Report</h3>
+                            <p>Daily, weekly, and monthly borrowing statistics</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="librarianManager.generateReport('borrowing')">
+                            Generate
+                        </button>
+                    </div>
+                    
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Fines Report</h3>
+                            <p>Overdue books and fines collection</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="librarianManager.generateReport('fines')">
+                            Generate
+                        </button>
+                    </div>
+                    
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Inventory Report</h3>
+                            <p>Book availability and distribution</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="librarianManager.generateReport('inventory')">
+                            Generate
+                        </button>
+                    </div>
+                    
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="report-info">
+                            <h3>Users Report</h3>
+                            <p>User activity and statistics</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="librarianManager.generateReport('users')">
+                            Generate
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="addBookModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> Add New Book</h3>
+                <button class="modal-close" onclick="dashboard.hideModal('addBookModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addBookForm">
+                    <div class="form-group">
+                        <label for="bookTitle">Book Title *</label>
+                        <input type="text" id="bookTitle" name="bookTitle" placeholder="Enter book title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAuthor">Author *</label>
+                        <input type="text" id="bookAuthor" name="bookAuthor" placeholder="Enter author name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookPublisher">Publisher</label>
+                        <input type="text" id="bookPublisher" name="bookPublisher" placeholder="Enter publisher name">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookPublishDate">Publish Date</label>
+                        <input type="date" id="bookPublishDate" name="bookPublishDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookCopies">Number of Copies *</label>
+                        <input type="number" id="bookCopies" name="bookCopies" value="1" min="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Book
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Scripts -->
+    <script src="../script.js"></script>
+    <script src="../database.js"></script>
+    <script src="../auth.js"></script>
+    <script src="../dashboard.js"></script>
+    <script src="../js/librarian.js"></script>
+    
+    <script>
+        // Sidebar navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all items
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show selected section
+                const sectionId = this.dataset.section + 'Section';
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-reader"></i>
+                <span>Library Management System</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#features" class="nav-link"><i class="fas fa-star"></i> Features</a>
+                <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="pages/login.html" class="btn btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="pages/register.html" class="btn btn-register"><i class="fas fa-user-plus"></i> Register</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Digital Library Management System</h1>
+            <p class="subtitle">Manage books, track borrowings, calculate fines, and streamline library operations with our modern digital platform</p>
+            <div class="hero-buttons">
+                <a href="pages/login.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-sign-in-alt"></i> Get Started
+                </a>
+                <a href="#features" class="btn btn-secondary btn-large">
+                    <i class="fas fa-play-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="book-stack">
+                <div class="book book-1"></div>
+                <div class="book book-2"></div>
+                <div class="book book-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Portals -->
+    <section class="portals-section">
+        <h2 class="section-title">Access Your Portal</h2>
+        <p class="section-subtitle">Choose your role to access the library system</p>
+        
+        <div class="portals-container">
+            <!-- Student Portal -->
+            <div class="portal-card student-portal">
+                <div class="portal-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>Student Portal</h3>
+                <p>Browse books, borrow, return, and check fines. Access your academic resources.</p>
+                <div class="portal-features">
+                    <span><i class="fas fa-check"></i> View Books</span>
+                    <span><i class="fas fa-check"></i> Borrow Books</span>
+                    <span><i class="fas fa-check"></i> Return Books</span>
+                    <span><i class="fas fa-check"></i> Check Fines</span>
+                </div>
+                <a href="pages/login.html?role=student" class="btn btn-portal">
+                    <i class="fas fa-sign-in-alt"></i> Student Login
+                </a>
+            </div>
+
+            <!-- Faculty Portal -->
+            <div class="portal-card faculty-portal">
+                <div class="portal-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>Faculty Portal</h3>
+                <p>Access research materials, extended borrowing periods, and course management.</p>
+                <div class="portal-features">
+                    <span><i class="fas fa-check"></i> Extended Borrowing</span>
+                    <span><i class="fas fa-check"></i> Course Materials</span>
+                    <span><i class="fas fa-check"></i> Research Access</span>
+                    <span><i class="fas fa-check"></i> Manage Courses</span>
+                </div>
+                <a href="pages/login.html?role=faculty" class="btn btn-portal">
+                    <i class="fas fa-sign-in-alt"></i> Faculty Login
+                </a>
+            </div>
+
+            <!-- Librarian Portal -->
+            <div class="portal-card librarian-portal">
+                <div class="portal-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Librarian Portal</h3>
+                <p>Manage library inventory, user accounts, transactions, and system administration.</p>
+                <div class="portal-features">
+                    <span><i class="fas fa-check"></i> Add/Remove Books</span>
+                    <span><i class="fas fa-check"></i> User Management</span>
+                    <span><i class="fas fa-check"></i> Transaction Logs</span>
+                    <span><i class="fas fa-check"></i> System Reports</span>
+                </div>
+                <a href="pages/login.html?role=librarian" class="btn btn-portal">
+                    <i class="fas fa-sign-in-alt"></i> Librarian Login
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <h2 class="section-title">System Features</h2>
+        <p class="section-subtitle">Comprehensive library management capabilities</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Book Management</h3>
+                <p>Add, update, remove, and search books with detailed information including author, publisher, and availability status.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3>Borrow & Return</h3>
+                <p>Streamlined borrowing and returning process with automatic availability updates and transaction records.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Fine Calculation</h3>
+                <p>Automated fine calculation based on borrowing duration with different rules for students and faculty.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>User Management</h3>
+                <p>Register and manage students, faculty, and librarians with role-based access control.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3>Reports & Analytics</h3>
+                <p>Generate reports on book usage, user activity, and financial transactions for better decision making.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Authentication</h3>
+                <p>Secure login system with encrypted passwords and session management for all user types.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h2 class="section-title">About This System</h2>
+            <p>This Library Management System is a web-based application designed to digitize and streamline library operations. Originally developed in Python with Tkinter GUI, this web version provides enhanced accessibility and user experience.</p>
+            
+            <div class="about-stats">
+                <div class="stat">
+                    <h3>1000+</h3>
+                    <p>Books Managed</p>
+                </div>
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>System Availability</p>
+                </div>
+                <div class="stat">
+                    <h3>99%</h3>
+                    <p>User Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-book-reader"></i> Library Management System</h3>
+                <p>Digital platform for efficient library operations and resource management.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="pages/login.html">Login</a></li>
+                    <li><a href="pages/register.html">Register</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>User Portals</h3>
+                <ul>
+                    <li><a href="pages/login.html?role=student">Student Portal</a></li>
+                    <li><a href="pages/login.html?role=faculty">Faculty Portal</a></li>
+                    <li><a href="pages/login.html?role=librarian">Librarian Portal</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> University Library, Academic City</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> library@university.edu</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Library Management System. All rights reserved.</p>
+            <p>Originally developed in Python, converted to Web version</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

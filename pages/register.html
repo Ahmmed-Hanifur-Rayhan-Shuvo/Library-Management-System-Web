@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Library Management System</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="../index.html" class="back-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+                <div class="auth-logo">
+                    <i class="fas fa-user-plus"></i>
+                    <h2>Create Account</h2>
+                </div>
+                <p class="auth-subtitle">Register for your library portal</p>
+            </div>
+
+            <form id="registerForm" class="auth-form registration-form">
+                <div class="form-group">
+                    <label for="userRole">Select Account Type</label>
+                    <div class="role-selector">
+                        <div class="role-option active" data-role="student">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Student</span>
+                        </div>
+                        <div class="role-option" data-role="faculty">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Faculty</span>
+                        </div>
+                        <div class="role-option" data-role="librarian">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Librarian</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="userRole" name="userRole" value="student" required>
+                </div>
+
+                <!-- Student Fields -->
+                <div id="studentFields" class="registration-fields">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rollNumber">Roll Number *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-hashtag"></i>
+                            <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter your roll number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="batch">Batch *</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar"></i>
+                                <input type="text" id="batch" name="batch" placeholder="e.g., 2023" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="semester">Semester *</label>
+                            <select id="semester" name="semester" class="input-with-icon" required>
+                                <option value="">Select Semester</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department *</label>
+                        <select id="department" name="department" class="input-with-icon" required>
+                            <option value="">Select Department</option>
+                            <option value="CSE">Computer Science & Engineering</option>
+                            <option value="EEE">Electrical & Electronics Engineering</option>
+                            <option value="CIVIL">Civil Engineering</option>
+                            <option value="BBA">Business Administration</option>
+                            <option value="LAW">Law</option>
+                            <option value="ENGLISH">English</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Faculty Fields -->
+                <div id="facultyFields" class="registration-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="facultyName">Full Name *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="facultyName" name="facultyName" placeholder="Enter your full name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="facultyDepartment">Department *</label>
+                        <select id="facultyDepartment" name="facultyDepartment" class="input-with-icon">
+                            <option value="">Select Department</option>
+                            <option value="CSE">Computer Science & Engineering</option>
+                            <option value="EEE">Electrical & Electronics Engineering</option>
+                            <option value="CIVIL">Civil Engineering</option>
+                            <option value="BBA">Business Administration</option>
+                            <option value="LAW">Law</option>
+                            <option value="ENGLISH">English</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Librarian Fields -->
+                <div id="librarianFields" class="registration-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="librarianName">Full Name *</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="librarianName" name="librarianName" placeholder="Enter your full name">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password Fields (Common) -->
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Create a password" required minlength="6">
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-meter" id="passwordStrength"></div>
+                    </div>
+                    <small class="password-strength-text" id="passwordStrengthText">Password strength</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password *</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small class="password-match" id="passwordMatch"></small>
+                </div>
+
+                <div class="form-group terms-checkbox">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span>I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-auth">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+
+                <div class="auth-divider">
+                    <span>Already have an account?</span>
+                </div>
+
+                <a href="login.html" class="btn btn-secondary btn-auth">
+                    <i class="fas fa-sign-in-alt"></i> Sign In Instead
+                </a>
+            </form>
+        </div>
+
+        <div class="auth-features">
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure Registration</h3>
+                <p>Your data is encrypted and protected</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-id-card"></i>
+                <h3>Get Your ID</h3>
+                <p>Receive unique ID after registration</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-question-circle"></i>
+                <h3>Need Help?</h3>
+                <p>Contact us at support@library.edu</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script src="../database.js"></script>
+    <script src="../auth.js"></script>
+    <script>
+        // Role selection
+        document.querySelectorAll('.role-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const role = this.dataset.role;
+                
+                // Update active state
+                document.querySelectorAll('.role-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Update hidden input
+                document.getElementById('userRole').value = role;
+                
+                // Show/hide appropriate fields
+                document.querySelectorAll('.registration-fields').forEach(field => {
+                    field.style.display = 'none';
+                });
+                
+                document.getElementById(`${role}Fields`).style.display = 'block';
+                
+                // Update form validation
+                updateFormValidation(role);
+            });
+        });
+
+        // Toggle password visibility
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.className = 'fas fa-eye-slash';
+                } else {
+                    input.type = 'password';
+                    icon.className = 'fas fa-eye';
+                }
+            });
+        });
+
+        // Password strength checker
+        const passwordInput = document.getElementById('password');
+        const strengthMeter = document.getElementById('passwordStrength');
+        const strengthText = document.getElementById('passwordStrengthText');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            let text = 'Password strength';
+            let className = '';
+            
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            switch(strength) {
+                case 0:
+                    className = '';
+                    text = 'Too weak';
+                    break;
+                case 1:
+                    className = 'strength-weak';
+                    text = 'Weak';
+                    break;
+                case 2:
+                    className = 'strength-medium';
+                    text = 'Medium';
+                    break;
+                case 3:
+                case 4:
+                    className = 'strength-strong';
+                    text = 'Strong';
+                    break;
+            }
+            
+            strengthMeter.className = `strength-meter ${className}`;
+            strengthText.textContent = text;
+        });
+
+        // Password match checker
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const passwordMatchText = document.getElementById('passwordMatch');
+        
+        confirmPasswordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            const confirm = this.value;
+            
+            if (confirm === '') {
+                passwordMatchText.textContent = '';
+                passwordMatchText.className = 'password-match';
+            } else if (password === confirm) {
+                passwordMatchText.textContent = '✓ Passwords match';
+                passwordMatchText.className = 'password-match valid';
+            } else {
+                passwordMatchText.textContent = '✗ Passwords do not match';
+                passwordMatchText.className = 'password-match invalid';
+            }
+        });
+
+        // Form validation per role
+        function updateFormValidation(role) {
+            // Reset all required fields
+            const allInputs = document.querySelectorAll('input[required], select[required]');
+            allInputs.forEach(input => input.required = false);
+            
+            // Set required fields based on role
+            const requiredFields = {
+                student: ['fullName', 'rollNumber', 'batch', 'semester', 'department', 'password', 'confirmPassword'],
+                faculty: ['facultyName', 'facultyDepartment', 'password', 'confirmPassword'],
+                librarian: ['librarianName', 'password', 'confirmPassword']
+            };
+            
+            requiredFields[role].forEach(fieldName => {
+                const element = document.getElementById(fieldName);
+                if (element) element.required = true;
+            });
+        }
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate passwords match
+            const password = passwordInput.value;
+            const confirm = confirmPasswordInput.value;
+            
+            if (password !== confirm) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters', 'error');
+                return;
+            }
+            
+            if (!document.getElementById('terms').checked) {
+                showNotification('Please agree to the terms and conditions', 'error');
+                return;
+            }
+            
+            // Submit registration
+            authManager.handleRegistration(e);
+        });
+
+        // Initialize with student role selected
+        document.querySelector('.role-option[data-role="student"]').click();
+    </script>
+</body>
+</html>
